@@ -1,10 +1,12 @@
 <?php
-require_once("Model/ArticleClass.php");
-require_once("Model/UserClass.php");
-require_once("Model/CommentClass.php");
-require_once("Model/ArticleRepository.php");
+require_once("Model/Order.php");
+require_once("Model/OrderRepository.php");
+require_once("Model/OrderLines.php");
+require_once("Model/OrderLinesRepository.php");
+require_once("Model/Product.php");
+require_once("Model/ProductRepository.php");
+require_once("Model/User.php");
 require_once("Model/UserRepository.php");
-require_once("Model/CommentRepository.php");
 
 session_start();
 

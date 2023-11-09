@@ -9,7 +9,7 @@ class Order
     public function __construct($datos)
     {
         $this->id = $datos['id'];
-        $this->orderLines = OrderLinesRepository::getOrderLines($datos['idOrderLines']);
+        $this->orderLines = OrderLinesRepository::getOrderLines($this->id);
         $this->date = $datos['date'];
         $this->totalPrice = $datos['totalPrice'];
         $this->status = $datos['status'];
