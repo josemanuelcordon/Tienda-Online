@@ -1,50 +1,16 @@
 <?php
-class Product
+class ProductRepository
 {
-    private $id;
-    private $name;
-    private $description;
-    private $price;
-    private $img;
-    private $stock;
-    private $state;
-
-    public function __construct($datos)
+    public static function getProductById($id_product)
     {
-        $this->id = $datos["id"];
-        $this->name = $datos["name"];
-        $this->description = $datos["description"];
-        $this->price = $datos["price"];
-        $this->img = $datos["img"];
-        $this->stock = $datos["stock"];
-        $this->state = $datos["state"];
-    }
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM products WHERE id=" . $id_product;
+        $result = $bd->query($q);
+        $product = null;
+        if ($result->num_rows > 0) {
+            $product = $result->fetch_array()[0];
+        }
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getDescription() {
-        return $this->description;
-    }
-
-    public function getPrice() {
-        return $this->price;
-    }
-
-    public function getImg() {
-        return $this->img;
-    }
-
-    public function getStock() {
-        return $this->stock;
-    }
-
-    public function getState() {
-        return $this->state;
+        return $product;
     }
 }
