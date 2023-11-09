@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="/assets/style.css">
     <title>Document</title>
 </head>
+<?php
+if (empty($_SESSION['user'])) {
+    echo '<form action="index.php?c=user" method="post">
+    <label for="username">Usuario</label>
+    <input type="text" name="username" id="username" required>
+    <label for="password"></label>
+    <input type="password" name="password" id="password" required>
+    <input type="submit" name="login" value="Iniciar Sesión">
+    </form>';
+    foreach($produts as $product) {
+        echo $product->get
+    }
+} else {
+    var_dump($_SESSION['user']);
+    echo 'Bienvenido:' . $_SESSION['user']->getUsername();
+}
+?>
+
 
 <body>
 

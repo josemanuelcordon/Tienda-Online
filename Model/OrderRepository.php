@@ -4,7 +4,7 @@ class OrderRepository
     public static function getUserCart($user_id)
     {
         $bd = Conectar::conexion();
-        $q = "SELECT * FROM order WHERE id_usuario=" . $user_id . " AND status=0";
+        $q = "SELECT * FROM cart WHERE id_user=" . $user_id . " AND status=0";
         $result = $bd->query($q);
         $cart = null;
         if ($result->num_rows > 0) {

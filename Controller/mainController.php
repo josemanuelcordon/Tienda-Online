@@ -9,10 +9,18 @@ require_once("Model/User.php");
 require_once("Model/UserRepository.php");
 
 session_start();
+$products = [];
 
-
-if (!empty($_GET['controller'])) {
-    $controlador = $_GET['controller'];
+if (!empty($_GET['c'])) {
+    $controlador = $_GET['c'];
+    if ($controlador = "user") {
+        require($controlador . "Controller.php");
+    }
 }
 
-include('View/mainView.phtml');
+if (!empty($_SESSION['user'])) {
+    $products = ProductRepository::getProductsLimited(0, 6);
+    include('View/mainView.phtml');
+} else {
+    include('View/loginView.phtml');
+}
