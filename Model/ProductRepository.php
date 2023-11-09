@@ -13,4 +13,16 @@ class ProductRepository
 
         return $product;
     }
+
+    public static function getProductsLimited($offset, $limit)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM product LIMIT " . $offset . ", " . $limit;
+        $result = $bd->query($q);
+        $products = [];
+        while ($datos = $result->fetch_assoc()) {
+            $products[] = new Product($datos);
+        }
+        return $products;
+    }
 }

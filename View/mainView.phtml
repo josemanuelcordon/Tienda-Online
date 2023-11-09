@@ -16,12 +16,12 @@ if (empty($_SESSION['user'])) {
     <input type="password" name="password" id="password" required>
     <input type="submit" name="login" value="Iniciar Sesión">
     </form>';
-    foreach($produts as $product) {
-        echo $product->get
-    }
 } else {
-    var_dump($_SESSION['user']);
     echo 'Bienvenido:' . $_SESSION['user']->getUsername();
+    foreach ($products as $product) {
+        echo $product->getName();
+        echo '<img src="' . $product->getImg() . '" width="100px"/>';
+    }
 }
 ?>
 
