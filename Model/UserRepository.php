@@ -12,4 +12,19 @@ class UserRepository
         }
         return null;
     }
+
+    public static function registerUser($username, $password, $address)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM user WHERE username='" . $username . "'";
+        $result = $bd->query($q);
+        $success = true;
+        if ($result->num_rows > 0) {
+            $success = false;
+        } else {
+            $q = "INSERT INTO user VALUES (NULL, '" . $username . "', '" . md5($password) . "', 1, '" . $address . "')";
+            $bd->query($q);
+        }
+        return $success;
+    }
 }

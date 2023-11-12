@@ -8,21 +8,15 @@
     <title>Document</title>
 </head>
 <?php
-if (empty($_SESSION['user'])) {
-    echo '<form action="index.php?c=user" method="post">
-    <label for="username">Usuario</label>
-    <input type="text" name="username" id="username" required>
-    <label for="password"></label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" name="login" value="Iniciar Sesión">
-    </form>';
-} else {
-    echo 'Bienvenido:' . $_SESSION['user']->getUsername();
-    foreach ($products as $product) {
-        echo $product->getName();
-        echo '<img src="' . $product->getImg() . '" width="100px"/>';
-    }
+
+echo 'Bienvenido:' . $_SESSION['user']->getUsername() . '<br>';
+foreach ($products as $product) {
+    echo '<img src="' . $product->getImg() . '" width="100px"/>';
+    echo $product->getName();
+    echo $product->getDescription();
 }
+
+
 ?>
 
 
