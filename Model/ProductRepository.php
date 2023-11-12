@@ -25,4 +25,11 @@ class ProductRepository
         }
         return $products;
     }
+
+    public static function createProduct($name, $description, $price, $img, $amount)
+    {
+        $bd = Conectar::conexion();
+        $q = "INSERT INTO product VALUES (NULL, '" . $name . "', '" . $description . "', " . $price . ", '" . $img . "' , " . $amount . ", 1)";
+        $bd->query($q);
+    }
 }

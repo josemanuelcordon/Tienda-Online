@@ -5,8 +5,6 @@ if (isset($_POST['login'])) {
     $_SESSION['user'] = UserRepository::checkLogin($username, $password);
 }
 
-
-
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -18,6 +16,10 @@ if (isset($_POST['register'])) {
     }
 }
 
+if (!empty($_GET['lo'])) {
+    session_destroy();
+    session_start();
+}
 
 if (!empty($_GET['register'])) {
     include('View/registerView.phtml');
