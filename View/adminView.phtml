@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+</head>
+
+<body>
+    <?php
+    foreach ($users as $user) {
+        echo $user->getUsername() . '<br>';
+        echo '<form method="POST" action="index.php?c=user&admin=1">
+                <select name="rol">';
+        echo '<option value="2" ' . ($user->getRol() == 2 ? ' selected' : '') . '>Admin</option>';
+        echo '<option value="1"' . ($user->getRol() == 1 ? ' selected' : '') . '>Default</option>';
+        echo '<option value="0"' . ($user->getRol() == 0 ? ' selected' : '') . '>Baneado</option>';
+        echo '</select>
+        <input type="hidden" name="id" value="' . $user->getId() . '">
+            <input type="submit" name="changeRol" value="Cambiar Rol"> 
+                </form>';
+    }
+    ?>
+</body>
+
+</html>

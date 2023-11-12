@@ -16,9 +16,21 @@ if (isset($_POST['register'])) {
     }
 }
 
+if (isset($_POST['changeRol'])) {
+    $rol = $_POST['rol'];
+    $userId = $_POST['id'];
+    UserRepository::changeRol($userId, $rol);
+}
+
 if (!empty($_GET['lo'])) {
     session_destroy();
     session_start();
+}
+
+if (!empty($_GET['admin'])) {
+    $users = UserRepository::getAllUsers();
+    include('View/adminView.phtml');
+    die;
 }
 
 if (!empty($_GET['register'])) {

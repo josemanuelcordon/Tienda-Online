@@ -13,7 +13,7 @@ echo 'Bienvenido:' . $_SESSION['user']->getUsername() . '<br>';
 echo '<a href="index.php?c=user&lo=1">Cerrar Sesión</a><br>';
 if ($_SESSION['user']->getRol() >= 2) {
     echo '<a href="index.php?c=product&cp=1">Crear producto</a><br>';
-    echo '<a href="#">Administrar usuarios</a><br>';
+    echo '<a href="index.php?c=user&admin=1">Administrar usuarios</a><br>';
 }
 
 foreach ($products as $product) {
