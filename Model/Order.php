@@ -39,4 +39,8 @@ class Order
     {
         return $this->status;
     }
+
+    public function updateLines() {
+        $this->orderLines = OrderLinesRepository::getOrderLines($this->id);
+    }
 }

@@ -11,6 +11,9 @@
 
 echo 'Bienvenido:' . $_SESSION['user']->getUsername() . '<br>';
 echo '<a href="index.php?c=user&lo=1">Cerrar Sesión</a><br>';
+if ($_SESSION['user']->getCart()) {
+    echo '<a href="index.php?c=order&cart=1">Carrito de la Compra</a>';
+}
 if ($_SESSION['user']->getRol() >= 2) {
     echo '<a href="index.php?c=product&cp=1">Crear producto</a><br>';
     echo '<a href="index.php?c=user&admin=1">Administrar usuarios</a><br>';
@@ -20,6 +23,14 @@ foreach ($products as $product) {
     echo '<img src="' . $product->getImg() . '" width="100px"/>';
     echo $product->getName();
     echo $product->getDescription();
+    echo '<form method="POST" action="index.php?c=order">
+                <select name="amount">';
+    for ($i = 1; $i <= ProductRepository::getStock($product->getId()); $i++) {
+        echo '<option value="' . $i . '">' . $i . '</option>';
+    }
+    echo '<input type="hidden" name="id" value="' . $product->getId() . '">';
+    echo '<input type="submit" value="Añadir al Carrito"><br>';
+    echo '</form>';
 }
 
 

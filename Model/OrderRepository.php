@@ -25,4 +25,16 @@ class OrderRepository
         }
         return $orders;
     }
+
+    public static function createCart($user_id)
+    {
+        $bd = Conectar::conexion();
+        $fecha = date("Y-m-d H:i:s");
+        $q = "INSERT INTO cart VALUES (NULL, '" . $fecha . "', 0, 0, " . $user_id . ")";
+        $result = $bd->query($q);
+        $q = "SELECT * FROM cart WHERE id_user=" . $user_id;
+        $result = $bd->query($q);
+        $cart = new Order($result->fetch_assoc());
+        return $cart;
+    }
 }

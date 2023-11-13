@@ -10,7 +10,8 @@ class OrderLines
     public function __construct($datos)
     {
         $this->id = $datos["id"];
-        $this->idProduct = ProductRepository::getProductById(intval($datos["id"]));
+        $this->idOrder = $datos["idOrder"];
+        $this->idProduct = $datos['idProduct'];
         $this->amount = $datos["amount"];
         $this->price = $datos["price"];
     }

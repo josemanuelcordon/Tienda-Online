@@ -46,4 +46,9 @@ class User
     {
         return OrderRepository::getUserOrders($this->id);
     }
+
+    public function setCart($cart)
+    {
+        $this->cart = $cart;
+    }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Carrito de la compra</h1>
+    <?php
+    var_dump($cart);
+    foreach ($cart->getOrderLines() as $line) {
+        echo $line->getIdOrder() . '-----------';
+        echo $line->getIdProduct() . '-----';
+        echo $line->getPrice() . '<br>';
+    }
+    ?>
+
+</body>
+
+</html>

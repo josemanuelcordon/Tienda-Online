@@ -10,7 +10,7 @@ require_once("Model/UserRepository.php");
 
 session_start();
 $products = [];
-$controllers = ['user', 'product'];
+$controllers = ['user', 'product', 'order'];
 
 if (!empty($_GET['c'])) {
     $controlador = $_GET['c'];
