@@ -3,7 +3,7 @@ class OrderLines
 {
     private $id;
     private $idOrder;
-    private $idProduct;
+    private $product;
     private $amount;
     private $price;
 
@@ -11,7 +11,7 @@ class OrderLines
     {
         $this->id = $datos["id"];
         $this->idOrder = $datos["idOrder"];
-        $this->idProduct = $datos['idProduct'];
+        $this->product = ProductRepository::getProductById($datos['idProduct']);
         $this->amount = $datos["amount"];
         $this->price = $datos["price"];
     }
@@ -26,9 +26,9 @@ class OrderLines
         return $this->idOrder;
     }
 
-    public function getIdProduct()
+    public function getProduct()
     {
-        return $this->idProduct;
+        return $this->product;
     }
 
     public function getAmount()

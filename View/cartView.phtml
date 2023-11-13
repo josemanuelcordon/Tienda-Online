@@ -11,15 +11,18 @@
 
     <h1>Carrito de la compra</h1>
     <?php
-    var_dump($cart);
+    echo 'Pedido:' . $cart->getId() . '<br>';
     foreach ($cart->getOrderLines() as $line) {
-        echo $line->getIdOrder() . '-----------';
-        echo $line->getIdProduct() . '-----';
-        echo $line->getPrice() . '<br>';
+
+        echo 'Id Producto: ' . $line->getProduct()->getId() . '<br>';
+        echo 'Nombre Producto: ' . $line->getProduct()->getName() . '<br>';
+        echo 'Imagen de Producto: <img src="' . $line->getProduct()->getImg() . '" width="100px"><br>';
+        echo 'Precio: ' . $line->getPrice() . '€<br>';
+        echo 'Cantidad: ' . $line->getAmount() . '<br>';
     }
     ?>
+    <a href="index.php?c=order&confirm=1">Confirmar pedido</a>
 
-    <h2>Esto es una rama adicional</h2>
 
 </body>
 

@@ -7,9 +7,8 @@ class ProductRepository
         $q = "SELECT * FROM product WHERE id=" . $id_product;
         $result = $bd->query($q);
         $product = null;
-        if ($result->num_rows > 0) {
-            $product = $result->fetch_array()[0];
-        }
+        $data = $result->fetch_assoc();
+        $product = new Product($data);
 
         return $product;
     }

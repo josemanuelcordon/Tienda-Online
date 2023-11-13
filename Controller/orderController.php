@@ -17,6 +17,10 @@ if (!empty($_POST['id'])) {
     $_SESSION['user']->getCart()->updateLines();
 }
 
+if (!empty($_GET['confirm'])) {
+    echo 'Me cago en todo';
+}
+
 if (!empty($_GET['cart'])) {
     $cart = $_SESSION['user']->getCart();
     include('View/cartView.phtml');
