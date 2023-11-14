@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda</title>
+</head>
+
+<body>
+    <h1>Tus pedidos</h1>
+    <?php
+    foreach ($orders as $order) {
+        echo '<h2>Pedido Id:' . $order->getId() . '</h2>';
+        echo '<p>Fecha: ' . $order->getDate() . '</p>';
+        echo '<p>Productos:</p>';
+        foreach ($order->getOrderLines() as $line) {
+            echo '<img src="' . $line->getProduct()->getImg() . '" width="100px"><br>';
+            echo '<p>' . $line->getProduct()->getName() . '</p>';
+            echo '<p>Cantidad: ' . $line->getAmount() . '</p>';
+            echo '<p>Precio: ' . $line->getPrice() . '€</p>';
+        }
+        echo '<p>Precio total del pedido: ' . $order->getTotalPrice() . '€</p><br><br>';
+    }
+    ?>
+</body>
+
+</html>

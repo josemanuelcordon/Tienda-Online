@@ -47,6 +47,6 @@ class Order
         foreach ($this->orderLines as $orderLine) {
             $totalPrice += $orderLine->getPrice() * $orderLine->getAmount();
         }
-        $this->totalPrice = $totalPrice;
+        return $totalPrice;
     }
 }

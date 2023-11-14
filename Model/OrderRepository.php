@@ -17,7 +17,7 @@ class OrderRepository
     public static function getUserOrders($user_id)
     {
         $bd = Conectar::conexion();
-        $q = "SELECT * FROM order WHERE id_usuario=" . $user_id;
+        $q = "SELECT * FROM cart WHERE id_user=" . $user_id . " AND status=1";
         $result = $bd->query($q);
         $orders = [];
         while ($datos = $result->fetch_assoc()) {
@@ -32,7 +32,7 @@ class OrderRepository
         $fecha = date("Y-m-d H:i:s");
         $q = "INSERT INTO cart VALUES (NULL, '" . $fecha . "', 0, " . $user_id . ")";
         $result = $bd->query($q);
-        $q = "SELECT * FROM cart WHERE id_user=" . $user_id;
+        $q = "SELECT * FROM cart WHERE id_user=" . $user_id . " AND status=0";
         $result = $bd->query($q);
         $cart = new Order($result->fetch_assoc());
         return $cart;

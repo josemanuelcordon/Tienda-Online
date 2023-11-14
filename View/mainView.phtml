@@ -18,8 +18,11 @@ if (!empty($_SESSION['delProd'])) {
 }
 
 echo '<a href="index.php?c=user&lo=1">Cerrar Sesión</a><br>';
+if ($orders) {
+    echo '<a href="index.php?orders=1&c=order">Ver mis pedidos</a><br>';
+}
 if ($_SESSION['user']->getCart()) {
-    echo '<a href="index.php?c=order&cart=1">Carrito de la Compra</a>';
+    echo '<a href="index.php?c=order&cart=1">Carrito de la Compra</a><br>';
 }
 if ($_SESSION['user']->getRol() >= 2) {
     echo '<a href="index.php?c=product&cp=1">Crear producto</a><br>';

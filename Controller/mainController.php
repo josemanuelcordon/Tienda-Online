@@ -21,6 +21,7 @@ if (!empty($_GET['c'])) {
 
 if (!empty($_SESSION['user'])) {
     $products = ProductRepository::getProductsLimited(0, 6);
+    $orders = $_SESSION['user']->getOrders();
     include('View/mainView.phtml');
 } else {
     include('View/loginView.phtml');
