@@ -11,7 +11,6 @@ class Order
         $this->id = $datos['id'];
         $this->orderLines = OrderLinesRepository::getOrderLines($this->id);
         $this->date = $datos['date'];
-        $this->totalPrice = $datos['totalPrice'];
         $this->status = $datos['status'];
     }
 
@@ -30,17 +29,24 @@ class Order
         return $this->date;
     }
 
-    public function getTotalPrice()
-    {
-        return $this->totalPrice;
-    }
+
 
     public function getStatus()
     {
         return $this->status;
     }
 
-    public function updateLines() {
+    public function updateLines()
+    {
         $this->orderLines = OrderLinesRepository::getOrderLines($this->id);
+    }
+
+    public function getTotalPrice()
+    {
+        $totalPrice = 0;
+        foreach ($this->orderLines as $orderLine) {
+            $totalPrice += $orderLine->getPrice() * $orderLine->getAmount();
+        }
+        $this->totalPrice = $totalPrice;
     }
 }

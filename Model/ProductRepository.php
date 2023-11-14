@@ -49,4 +49,24 @@ class ProductRepository
         $price = $result->fetch_array()[0];
         return $price;
     }
+
+    public static function isAvailable($id_product, $cantidad)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM product WHERE id=" . $id_product . " AND stock>= " . $cantidad;
+        $result = $bd->query($q);
+        return $result->num_rows > 0;
+    }
+
+    public static function calcNewStock($cart)
+    {
+        $lines = $cart->getOrderLines();
+        $bd = Conectar::conexion();
+        foreach ($lines as $line) {
+            $amount = $line->getAmount();
+            $idProduct = $line->getProduct()->getId();
+            $q = "UPDATE product SET stock=stock-" . $amount . " WHERE id=" . $idProduct;
+            $bd->query($q);
+        }
+    }
 }

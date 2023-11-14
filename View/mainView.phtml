@@ -10,6 +10,13 @@
 <?php
 
 echo 'Bienvenido:' . $_SESSION['user']->getUsername() . '<br>';
+if (!empty($confirmedOrder)) {
+    echo 'PEDIDO CONFIRMADO!!!<br>';
+}
+if (!empty($_SESSION['delProd'])) {
+    echo 'No se ha podido confirmar tu pedido por falta de stock de algun producto. Puedes volver a tu carrito!<br>';
+}
+
 echo '<a href="index.php?c=user&lo=1">Cerrar Sesión</a><br>';
 if ($_SESSION['user']->getCart()) {
     echo '<a href="index.php?c=order&cart=1">Carrito de la Compra</a>';

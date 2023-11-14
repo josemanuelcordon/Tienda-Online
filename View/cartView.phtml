@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <a href="index.php">Volver al inicio</a>
     <h1>Carrito de la compra</h1>
     <?php
     echo 'Pedido:' . $cart->getId() . '<br>';
@@ -20,6 +20,17 @@
         echo 'Precio: ' . $line->getPrice() . '€<br>';
         echo 'Cantidad: ' . $line->getAmount() . '<br>';
     }
+
+    if (!empty($_SESSION['delProd'])) {
+        echo 'Se han eliminado los siguientes productos por falta de stock: <br>';
+        foreach ($_SESSION['delProd'] as $product) {
+            echo '<img src="' . $product->getImg() . '" width="100px"/>';
+            echo $product->getName();
+            echo $product->getDescription() . '<br>';
+        }
+    }
+
+    echo 'Precio total del carrito: ' . $cart->getTotalPrice() . '<br>';
     ?>
     <a href="index.php?c=order&confirm=1">Confirmar pedido</a>
 

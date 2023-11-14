@@ -30,11 +30,18 @@ class OrderRepository
     {
         $bd = Conectar::conexion();
         $fecha = date("Y-m-d H:i:s");
-        $q = "INSERT INTO cart VALUES (NULL, '" . $fecha . "', 0, 0, " . $user_id . ")";
+        $q = "INSERT INTO cart VALUES (NULL, '" . $fecha . "', 0, " . $user_id . ")";
         $result = $bd->query($q);
         $q = "SELECT * FROM cart WHERE id_user=" . $user_id;
         $result = $bd->query($q);
         $cart = new Order($result->fetch_assoc());
         return $cart;
+    }
+
+    public static function confirmOrder($order_id)
+    {
+        $bd = Conectar::conexion();
+        $q = "UPDATE cart SET status=1 WHERE id=" . $order_id;
+        return $bd->query($q);
     }
 }
