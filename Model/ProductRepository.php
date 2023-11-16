@@ -69,4 +69,12 @@ class ProductRepository
             $bd->query($q);
         }
     }
+
+    public static function getAmountProducts()
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM product";
+        $result = $bd->query($q);
+        return $result->num_rows;
+    }
 }

@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  font-family: "Roboto";
+  font-weight: 100;
+}
+
+.nav-bar {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #333;
+}
+
+.logo {
+  position: absolute;
+  left: 80px;
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  font-size: 1.4rem;
+}
+
+.nav-link a {
+  color: #333;
+  padding-bottom: 8px;
+  padding: 10px;
+}
+
+.link:hover {
+  border-bottom: 3px solid #333;
+  font-weight: 600;
+}
+
+main {
+  padding: 20px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #7c93c3;
+  height: calc(100vh - 100px);
+}
+
+.message {
+  width: fit-content;
+  padding: 10px 20px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+}
+
+.error {
+  background-color: rgb(179, 31, 31);
+  color: #f0f0f0;
+}
+
+.product-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  padding-top: 20px;
+  justify-content: center;
+  position: relative;
+}
+
+.product {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-size: 1.3rem;
+  color: #f0f0f0;
+  background-color: #333;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.description {
+  opacity: 0.8;
+}
+
+.add-cart {
+  display: flex;
+  gap: 10px;
+}
+
+.add-cart select {
+  width: 50px;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+}
+
+.add-cart input {
+  padding: 8px;
+  font-size: 1.2rem;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  right: 100px;
+  top: 140px;
+  height: 100%;
+}
+
+aside button {
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #f0f0f0;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #f0f0f0;
+  color: #333;
+}

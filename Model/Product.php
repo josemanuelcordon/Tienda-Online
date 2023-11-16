@@ -54,4 +54,15 @@ class Product
     {
         return $this->state;
     }
+
+    public function getJSON()
+    {
+        $datos['id'] = $this->id;
+        $datos['name'] = $this->name;
+        $datos['description'] = $this->description;
+        $datos['stock'] = $this->stock;
+        $datos['img'] = $this->img;
+        $datos['stock'] = $this->stock;
+        return json_encode($datos);
+    }
 }

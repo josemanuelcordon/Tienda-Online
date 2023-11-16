@@ -4,51 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <title>Document</title>
 </head>
-<?php
-
-echo 'Bienvenido:' . $_SESSION['user']->getUsername() . '<br>';
-if (!empty($confirmedOrder)) {
-    echo 'PEDIDO CONFIRMADO!!!<br>';
-}
-if (!empty($_SESSION['delProd'])) {
-    echo 'No se ha podido confirmar tu pedido por falta de stock de algun producto. Puedes volver a tu carrito!<br>';
-}
-
-echo '<a href="index.php?c=user&lo=1">Cerrar Sesión</a><br>';
-if ($orders) {
-    echo '<a href="index.php?orders=1&c=order">Ver mis pedidos</a><br>';
-}
-if ($_SESSION['user']->getCart()) {
-    echo '<a href="index.php?c=order&cart=1">Carrito de la Compra</a><br>';
-}
-if ($_SESSION['user']->getRol() >= 2) {
-    echo '<a href="index.php?c=product&cp=1">Crear producto</a><br>';
-    echo '<a href="index.php?c=user&admin=1">Administrar usuarios</a><br>';
-}
-
-foreach ($products as $product) {
-    echo '<img src="' . $product->getImg() . '" width="100px"/>';
-    echo $product->getName();
-    echo $product->getDescription();
-    echo '<form method="POST" action="index.php?c=order">
-                <select name="amount">';
-    for ($i = 1; $i <= ProductRepository::getStock($product->getId()); $i++) {
-        echo '<option value="' . $i . '">' . $i . '</option>';
-    }
-    echo '<input type="hidden" name="id" value="' . $product->getId() . '">';
-    echo '<input type="submit" value="Añadir al Carrito"><br>';
-    echo '</form>';
-}
-
-
-?>
 
 
 <body>
 
+    <?php
+    echo '
+    <nav class="nav-bar">
+        <a class="logo" href="index.php"><img src="./assets/img/logo.png" alt="Logo nike"></a>
+        <ul class="nav-links">
+            <li class="nav-link"><a class="link" href="index.php">Inicio</a></li>';
+    if ($orders) {
+        echo '<li class="nav-link"><a class="link" href="index.php?orders=1&c=order">Pedidos</a></li>';
+    }
+    if ($_SESSION['user']->getCart()) {
+        echo '<li class="nav-link"><a class="link" href="index.php?c=order&cart=1">Carrito</a></li>';
+    }
+    if ($_SESSION['user']->getRol() >= 2) {
+        echo '<li class="nav-link"><a class="link" href="index.php?c=product&cp=1">Crear Producto</a></li>';
+        echo '<li class="nav-link"><a class="link" href="index.php?c=user&admin=1">Administrar</a></li>';
+    }
+    echo '<li class="nav-link"><a class="link" href="index.php?c=user&lo=1">Cerrar Sesión</a></li>
+            </ul>
+            </nav>';
+
+    echo '<main>';
+    if (!empty($_SESSION['confirmed'])) {
+        echo '<div class="message"> Pedido Confirmado</div>';
+    }
+    if (!empty($_SESSION['delProd'])) {
+        echo '<div class="message error">"No se ha podido confirmar tu pedido por falta de stock de algun producto. Puedes volver a tu carrito!</div>';
+    }
+    echo '<section class="product-wrapper">';
+    foreach ($products as $product) {
+        echo '<article class="product">';
+        echo '<img src="' . $product->getImg() . '" width ="200px" height="200px"/><br> ';
+        echo '<section class="product-info">';
+        echo '<p>' . $product->getName() . '</p>';
+        echo '<p class="description">' . $product->getDescription() . '</p>';
+        if ($product->getStock()) {
+            echo '<form class="add-cart" method="POST" action="index.php?c=order">
+                <select name="amount">';
+            for ($i = 1; $i <= $product->getStock(); $i++) {
+                echo '<option value="' . $i . '">' . $i . '</option>';
+            }
+            echo '</select>';
+            echo '<input type="hidden" name="id" value="' . $product->getId() . '">';
+            echo '<input type="submit" value="Añadir al Carrito"><br>';
+            echo '</form>';
+        }
+        echo '</section>';
+        echo '</article>';
+    }
+
+    echo '</section>';
+    echo '<aside>';
+    if ($linksNumber > 1) {
+        for ($i = 1; $i <= $linksNumber; $i++) {
+            echo '<button class="product-link ' . (($i == 1) ? 'active' : '') . '" value="' . $i * 6 - 6 . '">' . $i . '</button>';
+        }
+    }
+    echo '</aside>';
+
+    echo '</main>';
+
+    ?>
+    <script type="module" src="./View/main.js"></script>
 </body>
 
 </html>

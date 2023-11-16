@@ -19,6 +19,7 @@
         echo 'Imagen de Producto: <img src="' . $line->getProduct()->getImg() . '" width="100px"><br>';
         echo 'Precio: ' . $line->getPrice() . '€<br>';
         echo 'Cantidad: ' . $line->getAmount() . '<br>';
+        echo '<a href="index.php?c=order&cart=1&id=' . $line->getProduct()->getId() . '">Borrar del carrito</a><br>';
     }
 
     if (!empty($_SESSION['delProd'])) {
@@ -27,12 +28,18 @@
             echo '<img src="' . $product->getImg() . '" width="100px"/>';
             echo $product->getName();
             echo $product->getDescription() . '<br>';
+            echo 'Solo quedan en stock ' . $product->getStock() . ' unidades';
         }
     }
 
     echo 'Precio total del carrito: ' . $cart->getTotalPrice() . '<br>';
+
+    if ($cart->getOrderLines()) {
+        echo '<a href="index.php?c=order&confirm=1">Confirmar pedido</a>';
+    } else {
+        echo 'Añade más productos a tu carrito para confirmar el pedido';
+    }
     ?>
-    <a href="index.php?c=order&confirm=1">Confirmar pedido</a>
 
 
 </body>

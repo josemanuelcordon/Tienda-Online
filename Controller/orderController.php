@@ -3,6 +3,9 @@ if (!empty($_POST['id'])) {
     $cart = $_SESSION['user']->getCart();
     $productId = $_POST['id'];
     $amount = $_POST['amount'];
+    if (!empty($_SESSION['confirmed'])) {
+        $_SESSION['confirmed'] = null;
+    }
     $price = ProductRepository::getPriceById($productId);
     $isAvailable = ProductRepository::isAvailable($productId, $amount);
     if (!empty($cart) && $isAvailable) {
@@ -21,22 +24,28 @@ if (!empty($_GET['confirm'])) {
     $cart = $_SESSION['user']->getCart();
     $areAvailable = true;
     $_SESSION['delProd'] = [];
+    $_SESSION['confirmed'] = null;
     foreach ($cart->getOrderLines() as $line) {
         $idProduct = $line->getProduct()->getId();
         $amount = $line->getAmount();
         if (!ProductRepository::isAvailable($idProduct, $amount)) {
             $areAvailable = false;
             $_SESSION['delProd'][] = ProductRepository::getProductById($idProduct);
-            OrderLinesRepository::deleteItemFromCart($cart->getId(), $idProduct);
-            $_SESSION['user']->getCart()->updateLines();
         }
     }
     if ($areAvailable && $cart) {
-        $confirmedOrder = OrderRepository::confirmOrder($cart->getId());
+        $_SESSION['confirmed'] = OrderRepository::confirmOrder($cart->getId());
         ProductRepository::calcNewStock($cart);
         $_SESSION['user']->setCart(null);
     }
     header('location: index.php');
+}
+
+if (!empty($_GET['id'])) {
+    $idProduct = $_GET['id'];
+    $cart = $_SESSION['user']->getCart();
+    OrderLinesRepository::deleteItemFromCart($cart->getId(), $idProduct);
+    $_SESSION['user']->getCart()->updateLines();
 }
 
 if (!empty($_GET['orders'])) {
@@ -47,6 +56,9 @@ if (!empty($_GET['orders'])) {
 
 if (!empty($_GET['cart'])) {
     $cart = $_SESSION['user']->getCart();
+    if (!empty($_SESSION['delProd'])) {
+        $_SESSION['delProd'] = null;
+    }
     include('View/cartView.phtml');
     die;
 }
